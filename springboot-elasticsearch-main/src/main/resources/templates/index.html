@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Issue Tracker</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+    <style>
+    
+   
+    
+    .fa {
+  font-size: 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa:hover {
+  color: darkblue;
+}
+    
+#issues {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#issues td, #issues th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#issues tr:nth-child(even){background-color: #f2f2f2;}
+
+#issues tr:hover {background-color: #ddd;}
+
+#issues th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+#overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      height: 90vh;
+      background-color: white;
+      z-index: 1;
+    }
+
+    #popup-iframe {
+      width: 100%;
+      height: 100%;
+    }
+    </style>
+    
+    
+</head>
+
+<body>
+
+<div class="container my-5 ">
+    <h1 class="text-center">Tracker 007(Track Issues the Bond Way!)</h1>
+    <a th:href="@{/showNewIssueForm}" class="btn btn-primary m-3"> Add issue </a>
+    <a href="/" class="btn btn-danger text-right">Show All</a>
+
+
+    <table id="issues" border="1" class="table table-striped table-responsive-md">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Issue</th>
+            <th>Description</th>
+            <th>Application Name</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="issueDocument : ${listIssueDocuments}">
+            <td th:text="${issueDocument.id}"></td>
+            <td th:text="${issueDocument.name}"></td>
+            <td th:text="${issueDocument.description}"></td>
+            <td th:text="${issueDocument.appname}"></td>
+            <td th:text="${issueDocument.status}"></td>
+            <td>
+            	<a th:href="@{/showFormForPreview/{id}(id=${issueDocument.id})}" class="btn btn-success">Preview</a>
+            	<a th:href="@{/showFormForUpdate/{id}(id=${issueDocument.id})}" onclick="window.location.reload(true)" class="btn btn-success">Update</a>
+            	<a th:href="@{/showFormForClose/{id}(id=${issueDocument.id})}" class="btn btn-success">Close</a>
+                <a th:href="@{/deleteIssue/{id}(id=${issueDocument.id})}"  onclick="window.location.reload(true)" class="btn btn-danger">Delete</a>
+            
+
+			<i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+function myFunction(x) {
+  x.classList.toggle("fa-thumbs-down");
+}
+</script>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+com/pixelTrice/elastic/ElasticApplication.class
+com/pixelTrice/elastic/controller/ElasticSearchController.class
+com/pixelTrice/elastic/controller/UIController.class
+com/pixelTrice/elastic/model/Issue.class
+com/pixelTrice/elastic/config/ElasticSearchConfiguration.class
+com/pixelTrice/elastic/query/ElasticSearchQuery.class
